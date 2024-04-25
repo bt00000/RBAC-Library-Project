@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to the SJSU Library System</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>Use the navigation bar to access different modules.</p>
+    {% if 'role' in session %}
+        {% if session['role'] == 'Administrator' %}
+            <a class="btn btn-primary btn-lg" href="{{ url_for('admin') }}" role="button">Admin Dashboard</a>
+        {% elif session['role'] == 'Librarian' %}
+            <a class="btn btn-primary btn-lg" href="{{ url_for('librarian_dashboard') }}" role="button">Librarian Dashboard</a>
+        {% elif session['role'] == 'Student' %}
+            <p class="lead">Explore available books and your account details.</p>
+        {% endif %}
+    {% endif %}
+    <a class="btn btn-secondary btn-lg" href="{{ url_for('logout') }}" role="button">Logout</a>
+</div>
+{% endblock %}

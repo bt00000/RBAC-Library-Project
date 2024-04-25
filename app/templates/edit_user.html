@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Edit User</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" placeholder="Username" required value="{{ user.username }}">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="Email" required value="{{ user.email }}">
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select class="form-control" name="role" required>
+                {% for role in roles %}
+                <option value="{{ role.name }}" {% if role.id == user.role_id %}selected{% endif %}>{{ role.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ url_for('admin') }}" class="btn btn-secondary">Back to Admin Dashboard</a>
+    </form>
+</div>
+{% endblock %}
